@@ -1,0 +1,39 @@
+# Safetybits Python Vulnerability Finder
+
+This is a example pythong script to query the NIST NVD database to fetch vulnerabilities associated to given resources. Keep in mind this script is meant for educational purposes and it's not ready for production environments as provided.
+
+It takes a device list in `.csv` format, and outputs a `.json` with the vulnerabilities.
+
+Read more information about this script on our blog:
+
+[https://safetybits.io/blog/nis2-affect-european-industries/](https://safetybits.io/blog/nis2-affect-european-industries/)
+
+# Setup
+
+First run `pip install` to install the required libraries:
+
+```
+pip install -r requirements.txt
+```
+
+To use the script use `python vuln_finder.py -d inventory.csv -o output.json -k YOUR-API-KEY`:
+
+```
+usage: vuln_finder.py [-h] [-d DEVICES] [-o OUTPUT] -k APIKEY
+
+options:
+  -h, --help            show this help message and exit
+  -d DEVICES, --devices DEVICES
+                        Devices file in csv format. Default: inventory.csv.
+  -o OUTPUT, --output OUTPUT
+                        Output file where to store the json response. Default: output.json.
+  -k APIKEY, --apikey APIKEY
+                        NIST NVD API Key.
+```
+
+# Preparing for production
+
+If you want to adapt this code for production, here are a few recommendations:
+
+- Provide the API KEY outside the command line. Either a config file, or an environment variable.
+- Cache the results and use the `lastModStartDate` and `lastModEndDate` parameters to fetch only the newest updates.
